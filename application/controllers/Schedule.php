@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Category extends CI_Controller {
+class Schedule extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('CategoryModel');
+        $this->load->model('ScheduleModel');
     }
 
 	public function index()
 	{
 		$this->load->view('common/header');
-		$this->load->view('category_v');
+		$this->load->view('schedule_v');
 		$this->load->view('common/footer');
     }
 
@@ -19,7 +19,7 @@ class Category extends CI_Controller {
     {
         $data["success"] = false;
         
-        $data["data"] = $this->CategoryModel->get();
+        $data["data"] = $this->ScheduleModel->get();
 
         if (count($data["data"]) > 0) {
             $data["success"] = true;
@@ -28,12 +28,12 @@ class Category extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function getCategoryBySchoolYear()
+    public function getScheduleBySchoolYear()
     {
         $data["success"] = false;
         
         $schoolyear_id = $this->input->post("schoolyear_id");
-        $data["data"] = $this->CategoryModel->getCategoryBySchoolYear($schoolyear_id);
+        $data["data"] = $this->ScheduleModel->getScheduleBySchoolYear($schoolyear_id);
 
         if (count($data["data"]) > 0) {
             $data["success"] = true;
@@ -48,10 +48,10 @@ class Category extends CI_Controller {
 
         $request = array(
             "schoolyear_id" => $this->input->post("schoolyear_id"),
-            "category_name" => $this->input->post("category_name")
+            "dateofsched" => $this->input->post("dateofsched")
         );
         
-        $response = $this->CategoryModel->add($request);
+        $response = $this->ScheduleModel->add($request);
 
         if ($response) {
             $data["success"] = true;
@@ -64,13 +64,13 @@ class Category extends CI_Controller {
     {
         $data["success"] = false;
 
-        $category_id = $this->input->post("category_id");
+        $schedule_id = $this->input->post("schedule_id");
         $request = array(
             "schoolyear_id" => $this->input->post("schoolyear_id"),
-            "category_name" => $this->input->post("category_name")
+            "dateofsched" => $this->input->post("dateofsched")
         );
         
-        $response = $this->CategoryModel->update($category_id, $request);
+        $response = $this->ScheduleModel->update($schedule_id, $request);
 
         if ($response) {
             $data["success"] = true;

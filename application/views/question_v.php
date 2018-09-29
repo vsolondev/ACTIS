@@ -1,6 +1,7 @@
 <form id="frmQuestion">
     <select name="schoolyear_id" id="schoolyear_id"></select>
     <select name="category_id" id="category_id"></select>
+    <button id="btnFilter" type="button">Filter</button>
     <input type="text" name="question_id" id="question_id" placeholder="Question ID" readonly>
     <input type="text" name="question" id="question" placeholder="Question">
     <input type="radio" name="answer" id="answer_a" value="a" class="answers"><input type="text" name="choice_a" id="choice_a" placeholder="Choice A" class="choices">
@@ -31,17 +32,78 @@
 
 <script>
     $(document).ready(function() {
-        getQuestion();
-        getCategory();
         getSchoolYear();
 
-        function getQuestion() {
+        function getSchoolYear() {
+            $.ajax({
+                type: 'ajax',
+                method: 'POST',
+                url: '<?php echo base_url("SchoolYear/get"); ?>',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        var options = '';
+
+                        response.data.forEach(function(schoolyear) {
+                            options +=  '<option value="'+schoolyear.schoolyear_id+'">';
+                            options +=      schoolyear.schoolyear;
+                            options +=  '</option>';
+                        });
+
+                        $("#schoolyear_id").html(options);
+                    } else {
+                        alert("Erorr on response!");
+                    }
+                },
+                error: function (response) {
+                    alert("Erorr on request!");
+                }
+            });
+        }
+
+        function getCategoryBySchoolYear(schoolyear_id) {
+            $.ajax({
+                type: 'ajax',
+                method: 'POST',
+                url: '<?php echo base_url("Category/getCategoryBySchoolYear"); ?>',
+                data: "schoolyear_id="+schoolyear_id,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        var options = '';
+
+                        response.data.forEach(function(category) {
+                            options +=  '<option value="'+category.category_id+'">';
+                            options +=      category.category_name;
+                            options +=  '</option>';
+                        });
+
+                        $("#category_id").html(options);
+                    } else {
+                        alert("Erorr on response!");
+                    }
+                },
+                error: function (response) {
+                    alert("Erorr on request!");
+                }
+            });
+        }
+
+        $("#schoolyear_id").change(function() {
+            getCategoryBySchoolYear($(this).val());
+        });
+
+        $("#btnFilter").click(function() {
             $(".datatable-table").DataTable().clear().destroy();
 
             $.ajax({
                 type: 'ajax',
                 method: 'POST',
-                url: '<?php echo base_url("Question/get"); ?>',
+                url: '<?php echo base_url("Question/filter"); ?>',
+                data: [
+                    { "name": "schoolyear_id", "value": $("#schoolyear_id").val() },
+                    { "name": "category_id", "value": $("#category_id").val() }
+                ],
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
@@ -91,61 +153,7 @@
                     alert("Erorr on request!");
                 }
             });
-        }
-
-        function getSchoolYear() {
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("SchoolYear/get"); ?>',
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        var options = '';
-
-                        response.data.forEach(function(schoolyear) {
-                            options +=  '<option value="'+schoolyear.schoolyear_id+'">';
-                            options +=      schoolyear.schoolyear;
-                            options +=  '</option>';
-                        });
-
-                        $("#schoolyear_id").html(options);
-                    } else {
-                        alert("Erorr on response!");
-                    }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
-        }
-
-        function getCategory() {
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Category/get"); ?>',
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        var options = '';
-
-                        response.data.forEach(function(category) {
-                            options +=  '<option value="'+category.category_id+'">';
-                            options +=      category.category_name;
-                            options +=  '</option>';
-                        });
-
-                        $("#category_id").html(options);
-                    } else {
-                        alert("Erorr on response!");
-                    }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
-        }
+        });
 
         $("#btnAdd").click(function(e) {
             e.preventDefault();
@@ -159,7 +167,7 @@
                 success: function (response) {
                     if (response.success) {
                         alert("Question addded successfully!");
-                        getQuestion();
+                        $("#btnFilter").click();
                         $("#btnCancel").click();
                     } else {
                         alert("Erorr on response!");
@@ -199,7 +207,7 @@
                 success: function (response) {
                     if (response.success) {
                         alert("Question updated successfully!");
-                        getQuestion();
+                        $("#btnFilter").click();
                         $("#btnCancel").click();
                     } else {
                         alert("Erorr on response!");
@@ -214,7 +222,7 @@
         $("#btnCancel").click(function() {
             $("#question_id").val("");
             $("#question").val("");
-            $(".choices").prop("");
+            $(".choices").val("");
             $(".answers").prop("checked",false);
             
             $("#btnAdd").removeAttr('disabled');

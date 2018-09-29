@@ -27,6 +27,23 @@ class Question extends CI_Controller {
 
         echo json_encode($data);
     }
+
+    public function filter()
+    {
+        $data["success"] = false;
+        
+        $request = array(
+            "schoolyear_id" => $this->input->post("schoolyear_id"),
+            "category_id" => $this->input->post("category_id")
+        );
+        $data["data"] = $this->QuestionModel->filter($request);
+
+        if (count($data["data"]) > 0) {
+            $data["success"] = true;
+        }
+
+        echo json_encode($data);
+    }
     
     public function add()
     {

@@ -32,4 +32,17 @@ class ExamineeModel extends CI_Model {
 			return false;
 		}
     }
+
+    function login($code)
+    {
+        $this->db->where('code',$code);
+        $result = $this->db->get('examinee');
+        
+        if (count($result) > 0) {
+            return true;
+        } else {
+            return false;
+        }   
+
+    }
 }

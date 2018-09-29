@@ -7,6 +7,7 @@
 
     <button id="btnAdd" type="submit">Add</button>
     <button id="btnUpdate" type="submit">Update</button>
+    <button id="btnCancel" type="button">Cancel</button>
 </form>
 
 <table id="tblExaminee" class="datatable-table">
@@ -81,7 +82,7 @@
                 success: function (response) {
                     if (response.success) {
                         alert("Examinee addded successfully!");
-                        getExaminee();
+                        location.reload();
                     } else {
                         alert("Erorr on response!");
                     }
@@ -98,6 +99,9 @@
             $("#fullname").val($(this).attr("data-fullname"));
             $("#lastschool").val($(this).attr("data-lastschool"));
             $("#code").val($(this).attr("data-code"));
+
+            $("#btnAdd").attr('disabled','disabled');
+            $("#btnUpdate").removeAttr('disabled');
         });
 
         $("#btnUpdate").click(function(e) {
@@ -112,7 +116,7 @@
                 success: function (response) {
                     if (response.success) {
                         alert("Examinee updated successfully!");
-                        getExaminee();
+                        location.reload();
                     } else {
                         alert("Erorr on response!");
                     }
@@ -121,6 +125,17 @@
                     alert("Erorr on request!");
                 }
             });
+        });
+
+        $("#btnCancel").click(function() {
+            $("#examinee_id").val("");
+            $("#ornum").val("");
+            $("#fullname").val("");
+            $("#lastschool").val("");
+            $("#lastschool").val("");
+            
+            $("#btnAdd").removeAttr('disabled');
+            $("#btnUpdate").attr('disabled','disabled');
         });
     });
 </script>

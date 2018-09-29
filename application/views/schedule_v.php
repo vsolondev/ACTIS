@@ -1,19 +1,19 @@
-<form id="frmCategory">
+<form id="frmSchedule">
     <select name="schoolyear_id" id="schoolyear_id"></select>
     <button id="btnFilter" type="button">Filter</button>
-    <input type="text" name="category_id" id="category_id" placeholder="Category ID" readonly>
-    <input type="text" name="category_name" id="category_name">
+    <input type="text" name="schedule_id" id="schedule_id" placeholder="Schedule ID" readonly>
+    <input type="date" name="dateofsched" id="dateofsched" placeholder="Date of Schedule">
 
     <button id="btnAdd" type="submit">Add</button>
     <button id="btnUpdate" type="submit" disabled>Update</button>
     <button id="btnCancel" type="button">Cancel</button>
 </form>
 
-<table id="tblCategory" class="datatable-table">
+<table id="tblSchedule" class="datatable-table">
     <thead>
         <tr>
-            <th>category_name</th>
-            <th>schoolyear</th>
+            <th>School year</th>
+            <th>Date of Schedule</th>
             <th>action</th>
         </tr>
     </thead>
@@ -52,34 +52,34 @@
             });
         }
 
-        function getCategoryBySchoolYear(schoolyear_id) {
+        function getScheduleBySchoolYear(schoolyear_id) {
             $(".datatable-table").DataTable().clear().destroy();
 
             $.ajax({
                 type: 'ajax',
                 method: 'POST',
-                url: '<?php echo base_url("Category/getCategoryBySchoolYear"); ?>',
-                data: "schoolyear_id="+schoolyear_id,
+                url: '<?php echo base_url("Schedule/getScheduleBySchoolYear"); ?>',
+                data: 'schoolyear_id='+schoolyear_id,
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
                         var tbody = '';
 
-                        response.data.forEach(function(category) {
+                        response.data.forEach(function(schedule) {
                             tbody += '<tr>';
                             tbody +=    '<td>';
-                            tbody +=        category.category_name;
+                            tbody +=        schedule.schoolyear;
                             tbody +=    '</td>';
                             tbody +=    '<td>';
-                            tbody +=        category.schoolyear;
+                            tbody +=        schedule.dateofsched;
                             tbody +=    '</td>';
                             tbody +=    '<td>';
-                            tbody +=        '<button data-category-id="'+category.category_id+'" data-category-name="'+category.category_name+'" data-schoolyear="'+category.schoolyear+'" data-schoolyear-id="'+category.schoolyear_id+'" type="button" class="btnEdit">Edit</button>';
+                            tbody +=        '<button data-schedule-id="'+schedule.schedule_id+'" data-dateofsched="'+schedule.dateofsched+'"  data-schoolyear-id="'+schedule.schoolyear_id+'" type="button" class="btnEdit">Edit</button>';
                             tbody +=    '</td>';
                             tbody += '</tr>';
                         });
 
-                        $("#tblCategory tbody").html(tbody);
+                        $("#tblSchedule tbody").html(tbody);
                         $(".datatable-table").DataTable();
                     }
                 },
@@ -90,7 +90,7 @@
         }
 
         $("#btnFilter").click(function() {
-            getCategoryBySchoolYear($("#schoolyear_id").val());
+            getScheduleBySchoolYear($("#schoolyear_id").val());
         });
 
         $("#btnAdd").click(function(e) {
@@ -99,12 +99,12 @@
             $.ajax({
                 type: 'ajax',
                 method: 'POST',
-                url: '<?php echo base_url("Category/add"); ?>',
-                data: $("#frmCategory").serialize(),
+                url: '<?php echo base_url("Schedule/add"); ?>',
+                data: $("#frmSchedule").serialize(),
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        alert("Category addded successfully!");
+                        alert("Schedule addded successfully!");
                         $("#btnFilter").click();
                         $("#btnCancel").click();
                     } else {
@@ -119,8 +119,8 @@
 
         $(document).on("click", ".btnEdit", function() {
             $("#schoolyear_id").val($(this).attr("data-schoolyear-id"));
-            $("#category_id").val($(this).attr("data-category-id"));
-            $("#category_name").val($(this).attr("data-category-name"));
+            $("#schedule_id").val($(this).attr("data-schedule-id"));
+            $("#dateofsched").val($(this).attr("data-dateofsched"));
 
             $("#btnAdd").attr('disabled','disabled');
             $("#btnUpdate").removeAttr('disabled');
@@ -132,12 +132,12 @@
             $.ajax({
                 type: 'ajax',
                 method: 'POST',
-                url: '<?php echo base_url("Category/update"); ?>',
-                data: $("#frmCategory").serialize(),
+                url: '<?php echo base_url("Schedule/update"); ?>',
+                data: $("#frmSchedule").serialize(),
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        alert("Category updated successfully!");
+                        alert("Schedule updated successfully!");
                         $("#btnFilter").click();
                         $("#btnCancel").click();
                     } else {
@@ -151,8 +151,8 @@
         });
 
         $("#btnCancel").click(function() {
-            $("#category_id").val("");
-            $("#category_name").val("");
+            $("#schedule_id").val("");
+            $("#dateofsched").val("");
             
             $("#btnAdd").removeAttr('disabled');
             $("#btnUpdate").attr('disabled','disabled');

@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CategoryModel extends CI_Model {
-    function get() {
+class ScheduleModel extends CI_Model {
+    function get(){
         $result = $this->db->query(
-                            "SELECT * FROM category
-                            inner join schoolyear on category.schoolyear_id = schoolyear.schoolyear_id"
+                            "SELECT * FROM schedule
+                            inner join schoolyear on schedule.schoolyear_id = schoolyear.schoolyear_id"
                         )->result_array();
         
         if (count($result)) {
@@ -15,11 +15,11 @@ class CategoryModel extends CI_Model {
         }
     }
 
-    function getCategoryBySchoolYear($schoolyear_id) {
+    function getScheduleBySchoolYear($schoolyear_id){
         $result = $this->db->query(
-                            "SELECT * FROM category
-                            inner join schoolyear on category.schoolyear_id = schoolyear.schoolyear_id
-                            WHERE category.schoolyear_id = '$schoolyear_id'"
+                            "SELECT * FROM schedule
+                            inner join schoolyear on schedule.schoolyear_id = schoolyear.schoolyear_id
+                            where schedule.schoolyear_id = '$schoolyear_id'"
                         )->result_array();
         
         if (count($result)) {
@@ -30,7 +30,7 @@ class CategoryModel extends CI_Model {
     }
 
     function add($request){
-        $this->db->insert('category',$request);
+        $this->db->insert('schedule',$request);
         
 		if ($this->db->affected_rows()>0) {
 			return true;
@@ -40,8 +40,8 @@ class CategoryModel extends CI_Model {
     }
 
     function update($id, $request){
-        $this->db->where('category_id', $id);
-        $this->db->update('category', $request);
+        $this->db->where('schedule_id', $id);
+        $this->db->update('schedule', $request);
         
 		if ($this->db->affected_rows()>0) {
 			return true;

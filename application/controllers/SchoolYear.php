@@ -62,4 +62,32 @@ class SchoolYear extends CI_Controller {
 
         echo json_encode($data);
     }
+    
+    public function assign()
+    {
+        $data['success'] = false;
+
+        $schoolyear_id = $this->input->post('schoolyear_id');
+        
+        $response = $this->SchoolYearModel->assign($schoolyear_id);
+
+        if ($response) {
+            $data['success'] = true;
+        }
+
+        echo json_encode($data);
+    }
+
+    public function getCurrent()
+    {
+        $data["success"] = false;
+        
+        $data["data"] = $this->SchoolYearModel->getCurrent();
+
+        if (count($data["data"]) > 0) {
+            $data["success"] = true;
+        }
+
+        echo json_encode($data);
+    }
 }
