@@ -1,0 +1,49 @@
+html, body{
+	height: 100%;
+}
+#mainNav{
+	position: absolute;
+}
+#mainNav a{
+	color: #00C78C;
+	font-size: 40px;
+	font-weight: bolder;
+	font-family: oswald
+}
+#navbarResponsive ul li a{
+	color: aquamarine;
+	font-size: 20px
+}
+#cover{
+	background: #222 url('img/school.jpg') no-repeat;
+	background-size: cover;
+	color: white;
+	height: 100%;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	position: relative;
+
+
+}
+#cover-caption{
+	width: 100%;
+	position: relative;
+}
+#cover-caption h1{
+	font-size: 70px
+
+}
+#btnStarted{
+	border-radius: 6px;
+	text-decoration: none;
+	color: white;
+	font-size: 135%;
+	padding: 10px 20px;
+	border: solid white 3px; 
+	text-transform: uppercase;
+}
+#btnStarted:hover{
+	color: blue;
+	border: solid blue 3px;
+}
