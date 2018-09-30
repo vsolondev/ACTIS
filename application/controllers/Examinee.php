@@ -11,7 +11,7 @@ class Examinee extends CI_Controller {
 	public function index()
 	{
 		$data['examineecode']=$this->randStrGen(5);
-		$this->load->view('common/header');
+		$this->load->view('common/headerAdmin');
 		$this->load->view('examinee_v', $data);
 		$this->load->view('common/footer');
     }
@@ -68,8 +68,7 @@ class Examinee extends CI_Controller {
         $request = array(
             "ornum" => $this->input->post("ornum"),
             "fullname" => $this->input->post("fullname"),
-            "lastschool" => $this->input->post("lastschool"),
-            "code" => $this->input->post("code")
+            "lastschool" => $this->input->post("lastschool")
         );
         
         $response = $this->ExamineeModel->update($examinee_id, $request);

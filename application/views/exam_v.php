@@ -1,4 +1,3 @@
-asdasd
 
 <script>
     $(document).ready(function() {

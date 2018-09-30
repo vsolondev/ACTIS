@@ -33,15 +33,16 @@ class ExamineeModel extends CI_Model {
 		}
     }
 
-    function login($code)
+    function examineeLogin($code)
     {
-        $this->db->where('code',$code);
-        $result = $this->db->get('examinee');
+        $result = $this->db->query(
+            "SELECT * FROM examinee WHERE code='$code'"
+        )->result_array();
         
         if (count($result) > 0) {
-            return true;
+            return $result[0];
         } else {
-            return false;
+            return array();
         }   
 
     }

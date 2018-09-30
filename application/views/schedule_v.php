@@ -1,25 +1,42 @@
-<form id="frmSchedule">
-    <select name="schoolyear_id" id="schoolyear_id"></select>
-    <button id="btnFilter" type="button">Filter</button>
-    <input type="text" name="schedule_id" id="schedule_id" placeholder="Schedule ID" readonly>
-    <input type="date" name="dateofsched" id="dateofsched" placeholder="Date of Schedule">
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-control" id="frmSchedule">
+        <div class="row">
+            <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <select name="schoolyear_id" id="schoolyear_id" class="form-control"></select><br/>
+                    <button class="btn btn-primary" id="btnFilter" type="button">Filter</button>
+                </div>
+            <div class="col-md-4"></div>
+        </div><br/>
+        <div class="row">
+            <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="schedule_id" id="schedule_id" placeholder="Schedule ID" readonly>
+                    <label>Schedule</label>
+                    <input type="date" class="form-control" name="dateofsched" id="dateofsched" placeholder="Date of Schedule">
+                    <br/>
 
-    <button id="btnAdd" type="submit">Add</button>
-    <button id="btnUpdate" type="submit" disabled>Update</button>
-    <button id="btnCancel" type="button">Cancel</button>
-</form>
-
-<table id="tblSchedule" class="datatable-table">
-    <thead>
-        <tr>
-            <th>School year</th>
-            <th>Date of Schedule</th>
-            <th>action</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+                    <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
+                    <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
+                    <button class="btn btn-danger" id="btnCancel" type="button">Cancel</button>
+                </div>
+            <div class="col-md-4"></div>
+        </div>
+        </form>
+        <table id="tblSchedule" class="table table-striped table-hover datatable-table">
+            <thead>
+                <tr>
+                    <th>School year</th>
+                    <th>Date of Schedule</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -74,7 +91,7 @@
                             tbody +=        schedule.dateofsched;
                             tbody +=    '</td>';
                             tbody +=    '<td>';
-                            tbody +=        '<button data-schedule-id="'+schedule.schedule_id+'" data-dateofsched="'+schedule.dateofsched+'"  data-schoolyear-id="'+schedule.schoolyear_id+'" type="button" class="btnEdit">Edit</button>';
+                            tbody +=        '<button data-schedule-id="'+schedule.schedule_id+'" data-dateofsched="'+schedule.dateofsched+'"  data-schoolyear-id="'+schedule.schoolyear_id+'" type="button" class="btnEdit btn btn-secondary">Edit</button>';
                             tbody +=    '</td>';
                             tbody += '</tr>';
                         });

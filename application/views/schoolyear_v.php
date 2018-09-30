@@ -1,28 +1,41 @@
-<form id="frmSchoolYear">
-    <input type="text" name="schoolyear_id" id="schoolyear_id" placeholder="School Year ID" readonly>
-    <input type="text" name="schoolyear" id="schoolyear">
-
-    <button id="btnAdd" type="submit">Add</button>
-    <button id="btnUpdate" type="submit" disabled>Update</button>
-    <button id="btnCancel" type="button">Cancel</button>
-</form>
-
-<form id="frmIscurrent">
-    <label>Current Schoolyear</label>
-    <input type="text" name="schoolyear_id" id="schoolyear_id2">
-    <input type="text" name="iscurrent" id="iscurrent" readonly>
-</form>
-
-<table id="tblSchoolYear" class="datatable-table">
-    <thead>
-        <tr>
-            <th>SchoolYear</th>
-            <th>action</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+<div class="row">
+   <div class="col-md-12">
+      <form class="form-control" id="frmSchoolYear">
+         <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+               <input class="form-control" type="text" name="schoolyear_id" id="schoolyear_id" placeholder="School Year ID" readonly>
+               <label>School Year</label><input class="form-control" type="text" name="schoolyear" id="schoolyear"><br/>
+               <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
+               <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
+               <button class="btn btn-danger" id="btnCancel" type="button">Cancel</button>
+            </div>
+            <div class="col-md-4"></div>
+         </div>
+      </form>
+      <form class="form-control" id="frmIscurrent">
+         <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+               <label>Current Schoolyear</label>
+               <input class="form-control" type="text" name="schoolyear_id" id="schoolyear_id2"><br/>
+               <input class="form-control" type="text" name="iscurrent" id="iscurrent" readonly>
+            </div>
+            <div class="col-md-4"></div>
+         </div>
+      </form>
+      <table id="tblSchoolYear" class="table table-striped table-hover datatable-table">
+         <thead>
+            <tr>
+               <th>SchoolYear</th>
+               <th>action</th>
+            </tr>
+         </thead>
+         <tbody>
+         </tbody>
+      </table>
+   </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -47,8 +60,8 @@
                             tbody +=        schoolyear.schoolyear;
                             tbody +=    '</td>';
                             tbody +=    '<td>';
-                            tbody +=        '<button data-schoolyear-id="'+schoolyear.schoolyear_id+'" data-schoolyear="'+schoolyear.schoolyear+'" type="button" class="btnEdit">Edit</button>';
-                            tbody +=        '<button data-schoolyear-id="'+schoolyear.schoolyear_id+'" data-schoolyear="'+schoolyear.schoolyear+'" type="button" class="btnAssign">'+((schoolyear.iscurrent === "1") ? "Active" : "Assign")+'</button>';
+                            tbody +=        '<button data-schoolyear-id="'+schoolyear.schoolyear_id+'" data-schoolyear="'+schoolyear.schoolyear+'" type="button" class="btnEdit btn btn-secondary">Edit</button>';
+                            tbody +=        '<button data-schoolyear-id="'+schoolyear.schoolyear_id+'" data-schoolyear="'+schoolyear.schoolyear+'" type="button" class="btnAssign btn btn-info">'+((schoolyear.iscurrent === "1") ? "Active" : "Assign")+'</button>';
                             tbody +=    '</td>';
                             tbody += '</tr>';
                         });

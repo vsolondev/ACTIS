@@ -16,4 +16,15 @@
     <title>ACTIS</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" role="button" href="#">Take Exam</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" role="button" href="#">Logout</a>
+        </li>
+      </ul>
+    </nav>
     <div class="container-fluid">
+    

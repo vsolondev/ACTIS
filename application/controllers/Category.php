@@ -10,7 +10,7 @@ class Category extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('common/header');
+		$this->load->view('common/headerAdmin');
 		$this->load->view('category_v');
 		$this->load->view('common/footer');
     }

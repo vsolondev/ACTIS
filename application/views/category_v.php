@@ -1,25 +1,33 @@
-<form id="frmCategory">
-    <select name="schoolyear_id" id="schoolyear_id"></select>
-    <button id="btnFilter" type="button">Filter</button>
-    <input type="text" name="category_id" id="category_id" placeholder="Category ID" readonly>
-    <input type="text" name="category_name" id="category_name">
-
-    <button id="btnAdd" type="submit">Add</button>
-    <button id="btnUpdate" type="submit" disabled>Update</button>
-    <button id="btnCancel" type="button">Cancel</button>
-</form>
-
-<table id="tblCategory" class="datatable-table">
+<div class="row">
+    <div class="col-md-12">
+    <form class="form-control" id="frmCategory">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <select class="form-control" name="schoolyear_id" id="schoolyear_id"></select><br/>
+                <button class="btn btn-primary" id="btnFilter" type="button">Filter</button>
+                <input class="form-control" type="text" name="category_id" id="category_id" placeholder="Category ID" readonly><br/>
+                <label>Category</label><input class="form-control" type="text" name="category_name" id="category_name"><br/>
+                <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
+                <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
+                <button class="btn btn-danger" id="btnCancel" type="button">Cancel</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </form>
+    <table id="tblCategory" class="table table-striped table-hover datatable-table">
     <thead>
         <tr>
-            <th>category_name</th>
-            <th>schoolyear</th>
-            <th>action</th>
+            <th>Category Name</th>
+            <th>Schoolyear</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
     </tbody>
-</table>
+    </table>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -74,7 +82,7 @@
                             tbody +=        category.schoolyear;
                             tbody +=    '</td>';
                             tbody +=    '<td>';
-                            tbody +=        '<button data-category-id="'+category.category_id+'" data-category-name="'+category.category_name+'" data-schoolyear="'+category.schoolyear+'" data-schoolyear-id="'+category.schoolyear_id+'" type="button" class="btnEdit">Edit</button>';
+                            tbody +=        '<button data-category-id="'+category.category_id+'" data-category-name="'+category.category_name+'" data-schoolyear="'+category.schoolyear+'" data-schoolyear-id="'+category.schoolyear_id+'" type="button" class="btnEdit btn btn-secondary">Edit</button>';
                             tbody +=    '</td>';
                             tbody += '</tr>';
                         });

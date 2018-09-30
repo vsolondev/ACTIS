@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('common/header');
+		$this->load->view('common/headerAdmin');
 		$this->load->view('admin_v');
 		$this->load->view('common/footer');
     }
@@ -53,9 +53,7 @@ class Admin extends CI_Controller {
 
         $admin_id = $this->input->post("admin_id");
         $request = array(
-            "fullname" => $this->input->post("fullname"),
-            "username" => $this->input->post("username"),
-            "password" => $this->input->post("password")
+            "fullname" => $this->input->post("fullname")
         );
         
         $response = $this->AdminModel->update($admin_id, $request);

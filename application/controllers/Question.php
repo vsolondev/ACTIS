@@ -10,7 +10,7 @@ class Question extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('common/header');
+		$this->load->view('common/headerAdmin');
 		$this->load->view('question_v');
 		$this->load->view('common/footer');
     }

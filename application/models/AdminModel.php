@@ -32,4 +32,18 @@ class AdminModel extends CI_Model {
 			return false;
 		}
     }
+
+    function adminLogin($username, $password)
+    {
+        $result = $this->db->query(
+            "SELECT * FROM admin WHERE username='$username' AND password='$password'"
+        )->result_array();
+
+        if (count($result) > 0) {
+            return $result[0];
+        } else {
+            return array();
+        }   
+
+    }
 }

@@ -10,7 +10,7 @@ class SchoolYear extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('common/header');
+		$this->load->view('common/headerAdmin');
 		$this->load->view('schoolyear_v');
 		$this->load->view('common/footer');
     }

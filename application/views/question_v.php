@@ -1,34 +1,43 @@
-<form id="frmQuestion">
-    <select name="schoolyear_id" id="schoolyear_id"></select>
-    <select name="category_id" id="category_id"></select>
-    <button id="btnFilter" type="button">Filter</button>
-    <input type="text" name="question_id" id="question_id" placeholder="Question ID" readonly>
-    <input type="text" name="question" id="question" placeholder="Question">
-    <input type="radio" name="answer" id="answer_a" value="a" class="answers"><input type="text" name="choice_a" id="choice_a" placeholder="Choice A" class="choices">
-    <input type="radio" name="answer" id="answer_b" value="b" class="answers"><input type="text" name="choice_b" id="choice_b" placeholder="Choice B" class="choices">
-    <input type="radio" name="answer" id="answer_c" value="c" class="answers"><input type="text" name="choice_c" id="choice_c" placeholder="Choice C" class="choices">
-    <input type="radio" name="answer" id="answer_d" value="d" class="answers"><input type="text" name="choice_d" id="choice_d" placeholder="Choice D" class="choices">
+<div class="row">
+    <div class="col-md-12">
+    <form class="form-control" id="frmQuestion">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <select class="form-control" name="schoolyear_id" id="schoolyear_id"></select><br/>
+            <select class="form-control" name="category_id" id="category_id"></select><br/>
+            <button class="btn btn-primary" id="btnFilter" type="button">Filter</button>
+            <input class="form-control" type="text" name="question_id" id="question_id" placeholder="Question ID" readonly><br/>
+            <label>Question</label><input class="form-control" type="text" name="question" id="question" placeholder="Question"><br/>
+            <input type="radio" name="answer" id="answer_a" value="a" class="answers"><input class="form-control" type="text" name="choice_a" id="choice_a" placeholder="Choice A" class="choices"><br/>
+            <input type="radio" name="answer" id="answer_b" value="b" class="answers"><input class="form-control" type="text" name="choice_b" id="choice_b" placeholder="Choice B" class="choices"><br/>
+            <input type="radio" name="answer" id="answer_c" value="c" class="answers"><input class="form-control" type="text" name="choice_c" id="choice_c" placeholder="Choice C" class="choices"><br/>
+            <input type="radio" name="answer" id="answer_d" value="d" class="answers"><input class="form-control" type="text" name="choice_d" id="choice_d" placeholder="Choice D" class="choices"><br/>
 
-    <button id="btnAdd" type="submit">Add</button>
-    <button id="btnUpdate" type="submit" disabled>Update</button>
-    <button id="btnCancel" type="button">Cancel</button>
-</form>
-
-<table id="tblQuestion" class="datatable-table">
+            <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
+            <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
+            <button class="btn btn-danger" id="btnCancel" type="button">Cancel</button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    </form>
+    <table id="tblQuestion" class="table table-striped table-hover datatable-table">
     <thead>
         <tr>
-            <th>question</th>
-            <th>choice a</th>
-            <th>choice b</th>
-            <th>choice c</th>
-            <th>choice d</th>
-            <th>answer</th>
-            <th>action</th>
+            <th>Question</th>
+            <th>Choice A</th>
+            <th>Choice B</th>
+            <th>Choice C</th>
+            <th>Choice D</th>
+            <th>Answer</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
     </tbody>
-</table>
+    </table>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -140,7 +149,7 @@
                                             ' data-choice-c="' + question.choice_c + '" ' +
                                             ' data-choice-d="' + question.choice_d + '" ' +
                                             ' data-answer="' + question.answer + '" ' +
-                                            'type="button" class="btnEdit">Edit</button>';
+                                            'type="button" class="btnEdit btn btn-secondary">Edit</button>';
                             tbody +=    '</td>';
                             tbody += '</tr>';
                         });

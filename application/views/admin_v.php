@@ -1,25 +1,34 @@
-<form id="frmAdmin">
-    <input type="text" name="admin_id" id="admin_id" placeholder="Admin ID" readonly>
-    <input type="text" name="fullname" id="fullname" placeholder="Fullname">
-    <input type="text" name="username" id="username" placeholder="Username">
-    <input type="password" name="password" id="password" placeholder="Password">
+<div class="row">
+    <div class="col-md-12">
+        <form id="frmAdmin" class="form-control">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="admin_id" id="admin_id" placeholder="Admin ID" readonly><br/>
+                    <label>Fullname</label><input type="text" class="form-control" name="fullname" id="fullname" placeholder="Fullname"><br/>
+                    <label>Username</label><input type="text" class="form-control" name="username" id="username" placeholder="Username"><br/>
+                    <label>Password</label><input type="password" class="form-control" name="password" id="password" placeholder="Password"><br/>
 
-    <button id="btnAdd" type="submit">Add</button>
-    <button id="btnUpdate" type="submit" disabled>Update</button>
-    <button id="btnCancel" type="button">Cancel</button>
-</form>
-
-<table id="tblAdmin" class="datatable-table">
-    <thead>
-        <tr>
-            <th>Fullname</th>
-            <th>Username</th>
-            <th>action</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+                    <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
+                    <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
+                    <button class="btn btn-danger" id="btnCancel" type="button">Cancel</button>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </form>
+        <table id="tblAdmin" class="table table-striped table-hover datatable-table">
+            <thead>
+                <tr>
+                    <th>Fullname</th>
+                    <th>Username</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -46,7 +55,7 @@
                             tbody +=        admin.username;
                             tbody +=    '</td>';
                             tbody +=    '<td>';
-                            tbody +=        '<button data-admin-id="'+admin.admin_id+'" data-fullname="'+admin.fullname+'" data-username="'+admin.username+'" type="button" class="btnEdit">Edit</button>';
+                            tbody +=        '<button data-admin-id="'+admin.admin_id+'" data-fullname="'+admin.fullname+'" data-username="'+admin.username+'" type="button" class="btnEdit btn btn-secondary">Edit</button>';
                             tbody +=    '</td>';
                             tbody += '</tr>';
                         });

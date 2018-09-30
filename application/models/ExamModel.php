@@ -1,8 +1,6 @@
 <?php 
 	defined('BASEPATH') OR exit('No direct script access allowed');
-	/**
-	* 
-	*/
+
 	class ExamModel extends CI_Model
 	{
 		public function getQuestionChoices()
@@ -17,7 +15,7 @@
 				where question_a.category_id = '$id'"
 			);
 
-			if($query->num_rows()>0){
+			if($query->num_rows() > 0){
 				return $query->result_array();
 			}else{
 				return false;
