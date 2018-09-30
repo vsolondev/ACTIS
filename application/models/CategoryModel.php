@@ -29,6 +29,20 @@ class CategoryModel extends CI_Model {
         }
     }
 
+    function getCategoryByActiveSchoolYear() {
+        $result = $this->db->query(
+                    "SELECT * FROM category
+                    inner join schoolyear on category.schoolyear_id = schoolyear.schoolyear_id
+                    where schoolyear.iscurrent = 1"
+                )->result_array();
+
+        if (count($result)) {
+        return $result;
+        } else {
+        return array();
+        }
+    }
+
     function add($request){
         $this->db->insert('category',$request);
         

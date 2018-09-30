@@ -41,6 +41,19 @@ class Category extends CI_Controller {
 
         echo json_encode($data);
     }
+
+    public function getCategoryByActiveSchoolYear()
+    {
+        $data["success"] = false;
+        
+        $data["data"] = $this->CategoryModel->getCategoryByActiveSchoolYear();
+
+        if (count($data["data"]) > 0) {
+            $data["success"] = true;
+        }
+
+        echo json_encode($data);
+    }
     
     public function add()
     {
