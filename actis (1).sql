@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2018 at 04:15 PM
+-- Generation Time: Sep 30, 2018 at 11:58 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -40,11 +40,12 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `fullname`, `username`, `password`) VALUES
-(1, 'adminName01', 'admin01', ''),
+(1, 'adminName011', 'admin01', 'admin01'),
 (2, 'adminName02', 'admin02', 'adminn02'),
-(3, 'Zel', '', ''),
-(4, 'Gohan', '', ''),
-(5, 'Guko', '', '');
+(3, 'Zel', 'admin03', 'admin03'),
+(4, 'Gohan', 'admin04', 'admin04'),
+(5, 'Guko', 'admin05', 'admin05'),
+(6, 'batosay gwapo', 'batosay', 'batosay');
 
 -- --------------------------------------------------------
 
@@ -55,18 +56,22 @@ INSERT INTO `admin` (`admin_id`, `fullname`, `username`, `password`) VALUES
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL,
-  `schoolyear_id` int(11) NOT NULL,
-  `is_saved` tinyint(4) NOT NULL
+  `schoolyear_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`category_id`, `category_name`, `schoolyear_id`, `is_saved`) VALUES
-(1, 'English', 3, 0),
-(2, 'Math', 1, 0),
-(3, 'Science', 2, 0);
+INSERT INTO `category` (`category_id`, `category_name`, `schoolyear_id`) VALUES
+(1, 'English', 3),
+(2, 'Math', 1),
+(3, 'Science', 2),
+(4, 'English', 2),
+(5, 'English', 1),
+(6, 'Filipino', 1),
+(7, 'Math', 4),
+(8, 'Algebra', 4);
 
 -- --------------------------------------------------------
 
@@ -79,18 +84,22 @@ CREATE TABLE `examinee` (
   `ornum` varchar(50) NOT NULL,
   `fullname` varchar(255) NOT NULL,
   `lastschool` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
   `is_taken` tinyint(4) NOT NULL,
-  `code` varchar(255) NOT NULL
+  `status` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `examinee`
 --
 
-INSERT INTO `examinee` (`examinee_id`, `ornum`, `fullname`, `lastschool`, `is_taken`, `code`) VALUES
-(1, '123', 'Juan Dela Cruz', 'Basak', 0, '9Dh3A'),
-(2, '1234', 'Cardo Dalisay', 'Basak', 0, 'U8IQ9'),
-(3, '123456', 'San Gohan', 'Abellana', 0, 'bhWB4');
+INSERT INTO `examinee` (`examinee_id`, `ornum`, `fullname`, `lastschool`, `code`, `is_taken`, `status`) VALUES
+(1, '123', 'Juan Dela Cruz', 'ACT Bulacao Campus', '9Dh3A', 0, '0'),
+(2, '1234', 'Cardo Dalisay II', 'Basak', 'U8IQ9', 0, '0'),
+(3, '123456', 'San Gohan', 'Abellana', 'bhWB4', 0, '0'),
+(4, '1', 'Ricardo', 'Leon Kilat', 'hPVFt', 0, '0'),
+(5, '12', 'Marivin', 'Basak', 'tietY', 1, '1'),
+(6, '4', 'Ricardo Dalisay III', 'Abellana', '3N54l', 1, '2');
 
 -- --------------------------------------------------------
 
@@ -118,6 +127,20 @@ CREATE TABLE `examinee_question_answer` (
   `answer` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `examinee_question_answer`
+--
+
+INSERT INTO `examinee_question_answer` (`eqa_id`, `category_id`, `examinee_id`, `question_id`, `answer`) VALUES
+(1, 3, 5, 1, 'b'),
+(2, 3, 5, 3, 'c'),
+(3, 3, 5, 6, 'b'),
+(4, 3, 6, 1, 'c'),
+(5, 3, 6, 3, 'd'),
+(6, 3, 6, 6, 'b'),
+(7, 4, 6, 4, 'b'),
+(8, 4, 6, 5, 'd');
+
 -- --------------------------------------------------------
 
 --
@@ -142,7 +165,11 @@ CREATE TABLE `question` (
 
 INSERT INTO `question` (`question_id`, `question`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`, `category_id`, `schoolyear_id`) VALUES
 (1, 'question1', 'wrong1', 'correct', 'wrong2', 'wrong3', 'b', 3, 2),
-(2, 'question2', 'wrong1', 'wrong2', 'correct', 'wrong3', 'c', 2, 1);
+(2, 'question2', 'wrong1', 'wrong2', 'correct', 'wrong3', 'a', 2, 1),
+(3, 'science01', 'wrong1', 'wrong2', 'correct', 'wrong3', 'c', 3, 2),
+(4, 'english 01', 'wrong1', 'correct', 'wrong2', 'wrong3', 'b', 4, 2),
+(5, 'english 02', 'wrong1', 'wrong2', 'wrong3', 'correct', 'd', 4, 2),
+(6, 'what is earth', 'tm', 'globe', 'sun', 'smart', 'b', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -155,6 +182,18 @@ CREATE TABLE `schedule` (
   `dateofsched` date NOT NULL,
   `schoolyear_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`schedule_id`, `dateofsched`, `schoolyear_id`) VALUES
+(1, '2323-12-21', 1),
+(2, '2029-09-01', 1),
+(3, '2102-12-21', 1),
+(4, '2020-12-25', 2),
+(5, '2018-09-30', 2),
+(6, '2018-10-02', 3);
 
 -- --------------------------------------------------------
 
@@ -174,8 +213,9 @@ CREATE TABLE `schoolyear` (
 
 INSERT INTO `schoolyear` (`schoolyear_id`, `schoolyear`, `iscurrent`) VALUES
 (1, '2018-2019', 0),
-(2, '2020-2021', 0),
-(3, '2019-2020', 0);
+(2, '2020-2021', 1),
+(3, '2019-2020', 0),
+(4, '2022-2023', 0);
 
 --
 -- Indexes for dumped tables
@@ -238,19 +278,19 @@ ALTER TABLE `schoolyear`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `examinee`
 --
 ALTER TABLE `examinee`
-  MODIFY `examinee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `examinee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `examinee_category_taken`
@@ -262,25 +302,25 @@ ALTER TABLE `examinee_category_taken`
 -- AUTO_INCREMENT for table `examinee_question_answer`
 --
 ALTER TABLE `examinee_question_answer`
-  MODIFY `eqa_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `eqa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `question`
 --
 ALTER TABLE `question`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `schoolyear`
 --
 ALTER TABLE `schoolyear`
-  MODIFY `schoolyear_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `schoolyear_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
