@@ -83,6 +83,11 @@
                 data: $("#frmAdmin").serialize(),
                 dataType: 'json',
                 success: function (response) {
+                    if (response.unique === false) {
+                        alert("Username is already exist");
+                        return;
+                    }
+
                     if (response.success) {
                         alert("Admin addded successfully!");
                         getAdmin();

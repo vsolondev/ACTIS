@@ -12,6 +12,17 @@ class AdminModel extends CI_Model {
         }
     }
 
+    function isUniqueUsername($username) {
+        $this->db->where("username", $username);
+        $result = $this->db->get("admin")->result_array();
+
+        if (count($result) > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     function add($request){
         $this->db->insert('admin',$request);
         

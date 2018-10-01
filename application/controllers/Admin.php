@@ -31,17 +31,24 @@ class Admin extends CI_Controller {
     public function add()
     {
         $data["success"] = false;
+        $data["unique"] = false;
 
         $request = array(
             "fullname" => $this->input->post("fullname"),
             "username" => $this->input->post("username"),
             "password" => $this->input->post("password")
         );
-        
-        $response = $this->AdminModel->add($request);
 
-        if ($response) {
-            $data["success"] = true;
+        $isUnique = $this->AdminModel->isUniqueUsername($request["username"]);
+
+        if ($isUnique == true) {
+            $data["unique"] = true;
+
+            $response = $this->AdminModel->add($request);
+
+            if ($response) {
+                $data["success"] = true;
+            }
         }
 
         echo json_encode($data);
