@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-md-12">
-    <form class="form-control" id="frmCategory">
+    <form class="form-control" id="frmCategory" name="frmCategory">
         <div class="text-primary text-center"><h1>Add and Update Category</h1></div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <select class="form-control" name="schoolyear_id" id="schoolyear_id"></select><br/>
                 <input class="form-control" style="display:none" type="text" name="category_id" id="category_id" placeholder="Category ID" readonly><br/>
-                <label>Category</label><input class="form-control" type="text" name="category_name" id="category_name"><br/>
+                <label>Category</label><input class="form-control validate" type="text" name="category_name" id="category_name"><br/>
                 <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
                 <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
                 <button class="btn btn-danger" id="btnCancel" type="button">Cancel</button>
@@ -34,6 +34,9 @@
 
 <script>
     $(document).ready(function() {
+        var form = $("#frmCategory");
+
+        validate("#frmCategory");
         getSchoolYear();
 
         function getSchoolYear() {
@@ -107,25 +110,32 @@
         $("#btnAdd").click(function(e) {
             e.preventDefault();
 
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Category/add"); ?>',
-                data: $("#frmCategory").serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        alert("Category addded successfully!");
-                        $("#btnFilter").click();
-                        $("#btnCancel").click();
-                    } else {
-                        alert("Erorr on response!");
+            if (form.valid() === true) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'POST',
+                    url: '<?php echo base_url("Category/add"); ?>',
+                    data: $("#frmCategory").serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.unique === false) {
+                            alert("Category is already exist.");
+                            return false;
+                        }
+
+                        if (response.success) {
+                            alert("Category addded successfully!");
+                            $("#btnFilter").click();
+                            $("#btnCancel").click();
+                        } else {
+                            alert("Erorr on response!");
+                        }
+                    },
+                    error: function (response) {
+                        alert("Erorr on request!");
                     }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
+                });
+            }
         });
 
         $(document).on("click", ".btnEdit", function() {
@@ -139,26 +149,28 @@
 
         $("#btnUpdate").click(function(e) {
             e.preventDefault();
-
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Category/update"); ?>',
-                data: $("#frmCategory").serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        alert("Category updated successfully!");
-                        $("#btnFilter").click();
-                        $("#btnCancel").click();
-                    } else {
-                        alert("Erorr on response!");
+            
+            if (form.valid() === true) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'POST',
+                    url: '<?php echo base_url("Category/update"); ?>',
+                    data: $("#frmCategory").serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Category updated successfully!");
+                            $("#btnFilter").click();
+                            $("#btnCancel").click();
+                        } else {
+                            alert("Erorr on response!");
+                        }
+                    },
+                    error: function (response) {
+                        alert("Erorr on request!");
                     }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
+                });
+            }
         });
 
         $("#btnCancel").click(function() {

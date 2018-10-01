@@ -1,14 +1,14 @@
 <div class="row">
     <div class="col-md-12">
-        <form id="frmAdmin" class="form-control">
+        <form id="frmAdmin" name="frmAdmin" class="form-control">
         <div class="text-primary text-center"><h1>Add and Update Admin</h1></div>
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <input type="text" style="display:none" class="form-control" name="admin_id" id="admin_id" placeholder="Admin ID" readonly><br/>
-                    <label>Fullname</label><input type="text" class="form-control" name="fullname" id="fullname" placeholder="Fullname"><br/>
-                    <label>Username</label><input type="text" class="form-control" name="username" id="username" placeholder="Username"><br/>
-                    <label>Password</label><input type="password" class="form-control" name="password" id="password" placeholder="Password"><br/>
+                    <label>Fullname</label><input type="text" class="form-control lettersonly validate" name="fullname" id="fullname" placeholder="Fullname" required><br/>
+                    <label>Username</label><input type="text" class="form-control validate" name="username" id="username" placeholder="Username" required><br/>
+                    <label>Password</label><input type="password" class="form-control validate" name="password" id="password" placeholder="Password" required><br/>
 
                     <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
                     <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
@@ -33,6 +33,9 @@
 
 <script>
     $(document).ready(function() {
+        var form = $('#frmAdmin');
+
+        validate("#frmAdmin");
         getAdmin();
 
         function getAdmin() {
@@ -76,29 +79,32 @@
         $("#btnAdd").click(function(e) {
             e.preventDefault();
 
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Admin/add"); ?>',
-                data: $("#frmAdmin").serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.unique === false) {
-                        alert("Username is already exist");
-                        return;
-                    }
+            if (form.valid() === true) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'POST',
+                    url: '<?php echo base_url("Admin/add"); ?>',
+                    data: $("#frmAdmin").serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.unique === false) {
+                            alert("Username is already exist");
+                            return;
+                        }
 
-                    if (response.success) {
-                        alert("Admin addded successfully!");
-                        getAdmin();
-                    } else {
-                        alert("Erorr on response!");
+                        if (response.success) {
+                            alert("Admin addded successfully!");
+                            $("#btnCancel").click();
+                            getAdmin();
+                        } else {
+                            alert("Erorr on response!");
+                        }
+                    },
+                    error: function (response) {
+                        alert("Erorr on request!");
                     }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
+                });
+            }
         });
 
         $(document).on("click", ".btnEdit", function() {
@@ -114,24 +120,27 @@
         $("#btnUpdate").click(function(e) {
             e.preventDefault();
 
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Admin/update"); ?>',
-                data: $("#frmAdmin").serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        alert("Admin updated successfully!");
-                        getAdmin();
-                    } else {
-                        alert("Erorr on response!");
+            if (form.valid() === true) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'POST',
+                    url: '<?php echo base_url("Admin/update"); ?>',
+                    data: $("#frmAdmin").serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Admin updated successfully!");
+                            getAdmin();
+                            $("#btnCancel").click();
+                        } else {
+                            alert("Erorr on response!");
+                        }
+                    },
+                    error: function (response) {
+                        alert("Erorr on request!");
                     }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
+                });
+            }
         });
 
         $("#btnCancel").click(function(e) {

@@ -58,18 +58,24 @@ class Category extends CI_Controller {
     public function add()
     {
         $data["success"] = false;
+        $data["unique"] = false;
 
         $request = array(
             "schoolyear_id" => $this->input->post("schoolyear_id"),
             "category_name" => $this->input->post("category_name")
         );
+
+        $isUnique = $this->CategoryModel->isUniqueCategory($this->input->post("schoolyear_id"), $this->input->post("category_name"));
         
-        $response = $this->CategoryModel->add($request);
+        if ($isUnique == true) {
+            $data["unique"] = true;
+            $response = $this->CategoryModel->add($request);
 
-        if ($response) {
-            $data["success"] = true;
+            if ($response) {
+                $data["success"] = true;
+            }
         }
-
+        
         echo json_encode($data);
     }
 

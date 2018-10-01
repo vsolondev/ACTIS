@@ -15,6 +15,19 @@ class CategoryModel extends CI_Model {
         }
     }
 
+    function isUniqueCategory($schoolyear_id, $category_name) {
+        $result = $this->db->query(
+            "SELECT * FROM category
+            WHERE category.schoolyear_id = '$schoolyear_id' AND category.category_name = '$category_name'"
+        )->result_array();
+        
+		if (count($result) > 0) {
+			return false;
+		} else {
+			return true;
+		}
+    }
+
     function getCategoryBySchoolYear($schoolyear_id) {
         $result = $this->db->query(
                             "SELECT * FROM category

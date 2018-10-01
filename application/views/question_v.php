@@ -1,19 +1,19 @@
 <div class="row">
     <div class="col-md-12">
-    <form class="form-control" id="frmQuestion">
+    <form class="form-control" id="frmQuestion" name="frmQuestion">
     <div class="text-primary text-center"><h1>Add and Update Questions</h1></div>
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <select class="form-control" name="schoolyear_id" id="schoolyear_id"></select><br/>
-            <select class="form-control" name="category_id" id="category_id"></select><br/>
+            <select class="form-control validate" name="schoolyear_id" id="schoolyear_id"></select><br/>
+            <select class="form-control validate" name="category_id" id="category_id"></select><br/>
             <button class="btn btn-primary" id="btnFilter" type="button">Filter</button>
             <input class="form-control" type="text" style="display:none" name="question_id" id="question_id" placeholder="Question ID" readonly><br/>
-            <label>Question</label><input class="form-control" type="text" name="question" id="question" placeholder="Question"><br/>
-            <input type="radio" name="answer" id="answer_a" value="a" class="answers"><input class="form-control" type="text" name="choice_a" id="choice_a" placeholder="Choice A" class="choices"><br/>
-            <input type="radio" name="answer" id="answer_b" value="b" class="answers"><input class="form-control" type="text" name="choice_b" id="choice_b" placeholder="Choice B" class="choices"><br/>
-            <input type="radio" name="answer" id="answer_c" value="c" class="answers"><input class="form-control" type="text" name="choice_c" id="choice_c" placeholder="Choice C" class="choices"><br/>
-            <input type="radio" name="answer" id="answer_d" value="d" class="answers"><input class="form-control" type="text" name="choice_d" id="choice_d" placeholder="Choice D" class="choices"><br/>
+            <label>Question</label><input class="form-control validate" type="text" name="question" id="question" placeholder="Question"><br/>
+            <input type="radio" name="answer" id="answer_a" value="a" required class="answers validate"><input class="form-control choices validate" type="text" name="choice_a" id="choice_a" placeholder="Choice A"><br/>
+            <input type="radio" name="answer" id="answer_b" value="b" required class="answers validate"><input class="form-control choices validate" type="text" name="choice_b" id="choice_b" placeholder="Choice B"><br/>
+            <input type="radio" name="answer" id="answer_c" value="c" required class="answers validate"><input class="form-control choices validate" type="text" name="choice_c" id="choice_c" placeholder="Choice C"><br/>
+            <input type="radio" name="answer" id="answer_d" value="d" required class="answers validate"><input class="form-control choices validate" type="text" name="choice_d" id="choice_d" placeholder="Choice D"><br/>
 
             <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
             <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
@@ -42,6 +42,9 @@
 
 <script>
     $(document).ready(function() {
+        var form = $("#frmQuestion");
+
+        validate("#frmQuestion");
         getSchoolYear();
 
         function getSchoolYear() {
@@ -165,26 +168,28 @@
 
         $("#btnAdd").click(function(e) {
             e.preventDefault();
-
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Question/add"); ?>',
-                data: $("#frmQuestion").serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        alert("Question addded successfully!");
-                        $("#btnFilter").click();
-                        $("#btnCancel").click();
-                    } else {
-                        alert("Erorr on response!");
+            
+            if (form.valid() === true) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'POST',
+                    url: '<?php echo base_url("Question/add"); ?>',
+                    data: $("#frmQuestion").serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Question addded successfully!");
+                            $("#btnFilter").click();
+                            $("#btnCancel").click();
+                        } else {
+                            alert("Erorr on response!");
+                        }
+                    },
+                    error: function (response) {
+                        alert("Erorr on request!");
                     }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
+                });
+            }
         });
 
         $(document).on("click", ".btnEdit", function() {
@@ -205,26 +210,26 @@
 
         $("#btnUpdate").click(function(e) {
             e.preventDefault();
-
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Question/update"); ?>',
-                data: $("#frmQuestion").serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        alert("Question updated successfully!");
-                        $("#btnFilter").click();
-                        $("#btnCancel").click();
-                    } else {
-                        alert("Erorr on response!");
+            
+            if (form.valid() === true) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'POST',
+                    url: '<?php echo base_url("Question/update"); ?>',
+                    data: $("#frmQuestion").serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Question updated successfully!");
+                            $("#btnFilter").click();
+                            $("#btnCancel").click();
+                        }
+                    },
+                    error: function (response) {
+                        alert("Erorr on request!");
                     }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
+                });
+            }
         });
 
         $("#btnCancel").click(function() {

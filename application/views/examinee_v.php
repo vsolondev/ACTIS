@@ -1,15 +1,15 @@
 <div class="row">
     <div class="col-md-12">
-    <form class="form-control" id="frmExaminee"><div class="text-primary text-center"><h1>Add and Update Examinee</h1></div>
+    <form class="form-control" id="frmExaminee" name="frmExaminee"><div class="text-primary text-center"><h1>Add and Update Examinee</h1></div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="examinee_id" style="display:none" id="examinee_id" placeholder="Examinee ID" readonly><br/>
-                <label>Or Number</label><input type="text" class="form-control" name="ornum" id="ornum" placeholder="OR Number"><br/>
-                <label>Fullname</label><input type="text" class="form-control" name="fullname" id="fullname" placeholder="Fullname"><br/>
-                <label>Last School Attended</label><input type="text" class="form-control" name="lastschool" id="lastschool" placeholder="Last School Attended"><br/>
-                <label>Examinee Code</label><input type="text" class="form-control" name="code" id="code" readonly value="<?php echo $examineecode; ?>"><br/>
-                <label>Status</label><input type="text" class="form-control" name="status" id="status" hidden readonly value="0">
+                <label>Or Number</label><input type="number" class="form-control validate" name="ornum" id="ornum" placeholder="OR Number"><br/>
+                <label>Fullname</label><input type="text" class="form-control lettersonly validate" name="fullname" id="fullname" placeholder="Fullname"><br/>
+                <label>Last School Attended</label><input type="text" class="form-control validate" name="lastschool" id="lastschool" placeholder="Last School Attended"><br/>
+                <label>Examinee Code</label><input type="text" class="form-control validate" name="code" id="code" readonly value="<?php echo $examineecode; ?>"><br/>
+                <label class="d-none">Status</label><input type="text" class="form-control d-none" name="status" id="status" hidden readonly value="0">
 
                 <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
                 <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
@@ -36,7 +36,9 @@
 
 <script>
     $(document).ready(function() {
-        
+        var form = $('#frmExaminee');
+
+        validate("#frmExaminee");
         getExaminee();
 
         function getExaminee() {
@@ -83,28 +85,29 @@
         }
 
         $("#btnAdd").click(function(e) {
-            
             e.preventDefault();
 
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Examinee/add"); ?>',
-                data: $("#frmExaminee").serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        alert("Examinee addded successfully!");
-                        location.reload();
-                        
-                    } else {
-                        alert("Erorr on response!");
+            if (form.valid() === true) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'POST',
+                    url: '<?php echo base_url("Examinee/add"); ?>',
+                    data: $("#frmExaminee").serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Examinee addded successfully!");
+                            location.reload();
+                            
+                        } else {
+                            alert("Erorr on response!");
+                        }
+                    },
+                    error: function (response) {
+                        alert("Erorr on request!");
                     }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
+                });
+            }
         });
 
         $(document).on("click", ".btnEdit", function() {
@@ -121,24 +124,26 @@
         $("#btnUpdate").click(function(e) {
             e.preventDefault();
 
-            $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: '<?php echo base_url("Examinee/update"); ?>',
-                data: $("#frmExaminee").serialize(),
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        alert("Examinee updated successfully!");
-                        location.reload();
-                    } else {
-                        alert("Erorr on response!");
+            if (form.valid() === true) {
+                $.ajax({
+                    type: 'ajax',
+                    method: 'POST',
+                    url: '<?php echo base_url("Examinee/update"); ?>',
+                    data: $("#frmExaminee").serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Examinee updated successfully!");
+                            location.reload();
+                        } else {
+                            alert("Erorr on response!");
+                        }
+                    },
+                    error: function (response) {
+                        alert("Erorr on request!");
                     }
-                },
-                error: function (response) {
-                    alert("Erorr on request!");
-                }
-            });
+                });
+            }
         });
 
         $("#btnCancel").click(function() {

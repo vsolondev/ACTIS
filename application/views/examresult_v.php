@@ -22,8 +22,6 @@
 </div>
 
 <div>
-    <button class="dt-button buttons-print" tabindex="0" aria-controls="tblExaminee" type="button"><span>Print</span></button>
-
     No of students: <span id="numOfStudents"></span>
 </div>
 
@@ -41,18 +39,6 @@
 
 <script>
     $(document).ready(function() {
-
-        $("#btnPrint").click(function() {
-            $('#example').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'print'
-                ]
-            } );
-        });
-
-
-
         $.ajax({
             type: 'ajax',
             method: 'POST',
@@ -117,7 +103,12 @@
                         });
 
                         $("#tblExaminee tbody").html(html);
-                        $('#tblExaminee').DataTable();
+                        $('#tblExaminee').DataTable( {
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'print'
+                            ]
+                        } );
                     }
                 },
                 error: function (response) {

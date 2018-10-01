@@ -11,6 +11,9 @@
     <script src="<?php echo base_url('assets/jquery/jquery.min.js')?>"></script>
     <script src="<?php echo base_url('assets/popper/popper.min.js')?>"></script>
     <script src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>
+	  <script src="<?php echo base_url('assets/jquery-validation/dist/jquery.validate.min.js'); ?>"></script>
+	  <script src="<?php echo base_url('assets/jquery-validation/dist/additional-methods.min.js'); ?>"></script>
+	  <script src="<?php echo base_url('assets/jquery-validation/dist/validate.js'); ?>"></script>
 	  <script src="<?php echo base_url('assets/DataTables/datatables.js'); ?>"></script>
     <script src="<?php echo base_url('assets/DataTables/buttons.min.js'); ?>"></script>
 	  <script src="<?php echo base_url('assets/DataTables/print.min.js'); ?>"></script>
