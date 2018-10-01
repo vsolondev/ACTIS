@@ -48,9 +48,9 @@ class Examinee extends CI_Controller {
             "ornum" => $this->input->post("ornum"),
             "fullname" => $this->input->post("fullname"),
             "lastschool" => $this->input->post("lastschool"),
-            "code" => $this->input->post("code")
+            "code" => $this->input->post("code"),
+            "status" => $this->input->post("status")
         );
-        
         $response = $this->ExamineeModel->add($request);
 
         if ($response) {

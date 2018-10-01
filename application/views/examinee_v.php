@@ -9,6 +9,7 @@
                 <label>Fullname</label><input type="text" class="form-control" name="fullname" id="fullname" placeholder="Fullname"><br/>
                 <label>Last School Attended</label><input type="text" class="form-control" name="lastschool" id="lastschool" placeholder="Last School Attended"><br/>
                 <label>Examinee Code</label><input type="text" class="form-control" name="code" id="code" readonly value="<?php echo $examineecode; ?>"><br/>
+                <label>Status</label><input type="text" class="form-control" name="status" id="status" hidden readonly value="0">
 
                 <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
                 <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
@@ -35,6 +36,7 @@
 
 <script>
     $(document).ready(function() {
+        
         getExaminee();
 
         function getExaminee() {
@@ -69,6 +71,7 @@
 
                         $("#tblExaminee tbody").html(tbody);
 			            $(".datatable-table").DataTable();
+
                     } else {
                         alert("Erorr on response!");
                     }
@@ -80,6 +83,7 @@
         }
 
         $("#btnAdd").click(function(e) {
+            
             e.preventDefault();
 
             $.ajax({
@@ -92,6 +96,7 @@
                     if (response.success) {
                         alert("Examinee addded successfully!");
                         location.reload();
+                        
                     } else {
                         alert("Erorr on response!");
                     }

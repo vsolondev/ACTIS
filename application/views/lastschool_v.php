@@ -5,12 +5,9 @@
             <div class="row">
             <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <select class="form-control" name="status" id="status">
+                    <select hidden class="form-control" name="status" id="status">
                         <option value="all">All</option>
-                        <option value="0">Did not take exam</option>
-                        <option value="1">Failed</option>
-                        <option value="2">Passed</option>
-                    </select><br/>
+                    </select><br>
 
                     <select class="form-control" name="lastschool" id="lastschool"></select>
                     <button class="btn btn-primary" type="submit" id="btnFilter">Filter</button>
@@ -26,7 +23,6 @@
         <tr>
             <th>Fullname</th>
             <th>Last School</th>
-            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -38,7 +34,7 @@
         $.ajax({
             type: 'ajax',
             method: 'POST',
-            url: '<?php echo base_url("ExamResult/getUniqueSchool"); ?>',
+            url: '<?php echo base_url("LastSchool/getUniqueSchool"); ?>',
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
@@ -74,14 +70,7 @@
                         var html = '';
 
                         response.examinees.forEach(function(examinee) {
-                            var status = "";
-                            if (examinee.status === "0") {
-                                status = "Did not take exam"; 
-                            } else if (examinee.status === "1") {
-                                status = "Failed";
-                            } else {
-                                status = "Passed";
-                            }
+                            
 
                             html += '<tr>';
                             html +=     '<td>';
@@ -89,9 +78,6 @@
                             html +=     '</td>';
                             html +=     '<td>';
                             html +=         examinee.lastschool;
-                            html +=     '</td>';
-                            html +=     '<td>';
-                            html +=         status;
                             html +=     '</td>';
                             html += '</tr>';
                         });

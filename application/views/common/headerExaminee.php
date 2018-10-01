@@ -19,9 +19,6 @@
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" role="button" href="#">Take Exam</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" role="button" href="<?php echo base_url('Home');?>">Logout</a>
         </li>
       </ul>

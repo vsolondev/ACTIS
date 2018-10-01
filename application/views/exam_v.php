@@ -190,7 +190,6 @@
                 dataType: 'json',
                 success: function (response) {
                     alert("Exam Completed");
-
                     // E clear ang naa sa exam unya butangan ug thank you.
                     // Dili na ka take balik
                 },

@@ -52,6 +52,16 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item">
+          <a class="nav-link" role="button" href="<?php echo base_url('ExamResult');?>">Exam Result</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" role="button" href="<?php echo base_url('LastSchool');?>">Last School</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
           <a class="nav-link" role="button" href="<?php echo base_url('Home');?>">Logout</a>
         </li>
       </ul>

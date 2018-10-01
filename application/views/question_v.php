@@ -89,8 +89,6 @@
                         });
 
                         $("#category_id").html(options);
-                    } else {
-                        alert("Erorr on response!");
                     }
                 },
                 error: function (response) {
