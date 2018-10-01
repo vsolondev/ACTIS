@@ -7,8 +7,10 @@
             <div class="modal-body">
                 <form id="frmAdmin">
                     <div class="form-group">
-                       <label>Username</label><input  class="form-control" type="text" name="username" id="username" placeholder="Enter Username">
-                       <label>Password</label><input  class="form-control" type="password" name="password" id="password" placeholder="Enter Password">
+                        <label>Username</label><input  class="form-control" type="text" name="username" id="username" placeholder="Enter Username">
+                        <label>Password</label><input  class="form-control" type="password" name="password" id="password" placeholder="Enter Password">
+                    </div>
+                    <div>
                         <button id="btnLoginAdmin" type="submit" class="btn btn-primary" style="cursor:pointer">OK</button>
                     </div>
                 </form>
@@ -48,10 +50,10 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        alert("Success!");
+                        alert("Welcome Admin!");
                         document.location.href = '<?php echo base_url("Admin");?>';
                     } else {
-                        alert("Username or password is not match!");
+                        alert("Username or password does not match!");
                     }
                 },
                 error: function (response) {
@@ -71,10 +73,10 @@
                 dataType: 'json',
                 success: function (response) {
                     if (response.success) {
-                        alert("Success!");
+                        alert("Welcome Examinee!");
                         document.location.href = '<?php echo base_url("Exam");?>';
                     } else {
-                        alert("Code is not exist!");
+                        alert("Code does not exist!");
                     }
                 },
                 error: function (response) {

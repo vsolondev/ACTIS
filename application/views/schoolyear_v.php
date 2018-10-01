@@ -1,10 +1,10 @@
 <div class="row">
    <div class="col-md-12">
-      <form class="form-control" id="frmSchoolYear">
+      <form class="form-control" id="frmSchoolYear"><div class="text-primary text-center"><h1>Add and Update School Year</h1></div>
          <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-               <input class="form-control" type="text" name="schoolyear_id" id="schoolyear_id" placeholder="School Year ID" readonly>
+               <input class="form-control" type="text" name="schoolyear_id" id="schoolyear_id" style="display:none" placeholder="School Year ID" readonly>
                <label>School Year</label><input class="form-control" type="text" name="schoolyear" id="schoolyear"><br/>
                <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
                <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>

@@ -9,6 +9,8 @@ class Home extends CI_Controller {
 
         $this->load->model('AdminModel');
         $this->load->model('ExamineeModel');
+        $this->load->helper('url');
+        $this->load->helper('form');
     }
 
 	public function index()
@@ -22,7 +24,9 @@ class Home extends CI_Controller {
     {
         $data["success"] = false;
 
-        $response = $this->AdminModel->adminLogin($this->input->post("username"), $this->input->post("password"));
+        $response = $this->AdminModel->adminLogin($this->input->post("username"), 
+                                                $this->input->post("password")
+        );
 
         if (count($response) > 0) {
             $data["success"] = true;
@@ -45,5 +49,19 @@ class Home extends CI_Controller {
         }
 
         echo json_encode($data);
+    }
+
+    public function adminLogout()
+    {
+            $this->session->unset_userdata('admin_id');
+            $this->session->sess_destroy();
+            redirect('Home');
+    }
+
+    public function Examinee()
+    {
+            $this->session->unset_userdata('examinee_id');
+            $this->session->sess_destroy();
+            redirect('Home');
     }
 }

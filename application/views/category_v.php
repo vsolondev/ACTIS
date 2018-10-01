@@ -1,16 +1,19 @@
 <div class="row">
     <div class="col-md-12">
     <form class="form-control" id="frmCategory">
+        <div class="text-primary text-center"><h1>Add and Update Category</h1></div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <select class="form-control" name="schoolyear_id" id="schoolyear_id"></select><br/>
-                <button class="btn btn-primary" id="btnFilter" type="button">Filter</button>
-                <input class="form-control" type="text" name="category_id" id="category_id" placeholder="Category ID" readonly><br/>
+                <input class="form-control" style="display:none" type="text" name="category_id" id="category_id" placeholder="Category ID" readonly><br/>
                 <label>Category</label><input class="form-control" type="text" name="category_name" id="category_name"><br/>
                 <button class="btn btn-primary" id="btnAdd" type="submit">Add</button>
                 <button class="btn btn-primary" id="btnUpdate" type="submit" disabled>Update</button>
                 <button class="btn btn-danger" id="btnCancel" type="button">Cancel</button>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="btnFilter" type="button">Filter</button>
             </div>
             <div class="col-md-4"></div>
         </div>

@@ -1,13 +1,24 @@
-<form id="frmCategory">
-    <select name="category_id" id="category_id"></select>
-    <button type="submit" id="btnTakeExam">Take Exam</button>
-</form>
-
-<form id="frmQuestionsWithAnswers">
-    <div id="divQuestionsWithAnswers"></div>
-    <button type="submit" id="btnNext">Next</button>
-    <button type="submit" class="btn btn-warning btn-sm" id="btnSubmitAnswers">Submit Answers</button>
-</form>
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-control" id="frmCategory">
+            <div class="row">
+            <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <select class="form-control" name="category_id" id="category_id"></select>
+                    <button class="btn btn-primary" type="submit" id="btnTakeExam">Take Exam</button>
+                </div>
+            <div class="col-md-4"></div>
+            </div>
+        </form>
+        <form class="form-control" id="frmQuestionsWithAnswers">
+            <div id="divQuestionsWithAnswers">
+                
+            </div>
+            <button class="btn btn-primary" type="submit" id="btnNext">Next</button>
+            <button class="btn btn-warning" type="submit" id="btnSubmitAnswers">Submit Answers</button>
+        </form>
+    </div>
+</div>
 
 <script>
     $(document).ready(function() {

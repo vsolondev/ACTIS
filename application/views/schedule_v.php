@@ -1,10 +1,13 @@
 <div class="row">
     <div class="col-md-12">
         <form class="form-control" id="frmSchedule">
+        <div class="text-primary text-center"><h1>Add and Update Schedule</h1></div>
         <div class="row">
             <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <select name="schoolyear_id" id="schoolyear_id" class="form-control"></select><br/>
+                </div>
+                <div class="">
                     <button class="btn btn-primary" id="btnFilter" type="button">Filter</button>
                 </div>
             <div class="col-md-4"></div>
@@ -12,7 +15,7 @@
         <div class="row">
             <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control" name="schedule_id" id="schedule_id" placeholder="Schedule ID" readonly>
+                    <input style="display:none" type="text" class="form-control" name="schedule_id" id="schedule_id" placeholder="Schedule ID" readonly>
                     <label>Schedule</label>
                     <input type="date" class="form-control" name="dateofsched" id="dateofsched" placeholder="Date of Schedule">
                     <br/>

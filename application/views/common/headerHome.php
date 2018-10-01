@@ -16,15 +16,21 @@
     <title>ACTIS</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-            <a href="#modalAdmin" class="nav-link" data-toggle="modal" data-target="#modalAdmin">Login as Admin</a>
-        </li>
-        <li class="nav-item">
-            <a href="#modalExaminee" class="nav-link" data-toggle="modal" data-target="#modalExaminee">Login as Examinee</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="text-primary text-center">
+      <h1>Asian College of Technology Integrated School</h1>
+    </div>
     <div class="container-fluid">
-    
+      <div class="row">
+        <form class="form-control">
+          <div class="col-md-12">
+          <div class="col-md-4">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAdmin">Login as Admin</button>
+          </div>
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExaminee">Login as Examinee</button>
+          </div>
+          </div>
+        </form>
+        </div>
+      </div>

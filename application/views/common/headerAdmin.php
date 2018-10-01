@@ -16,6 +16,9 @@
     <title>ACTIS</title>
   </head>
   <body>
+    <div class="text-primary text-center">
+      <h1>Asian College of Technology Integrated School</h1>
+    </div>
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -45,6 +48,11 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" role="button" href="<?php echo base_url('Schedule');?>">Schedule</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" role="button" href="<?php echo base_url('Home');?>">Logout</a>
         </li>
       </ul>
     </nav>

@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-12">
-    <form class="form-control" id="frmExaminee">
+    <form class="form-control" id="frmExaminee"><div class="text-primary text-center"><h1>Add and Update Examinee</h1></div>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <input type="text" class="form-control" name="examinee_id" id="examinee_id" placeholder="Examinee ID" readonly><br/>
+                <input type="text" class="form-control" name="examinee_id" style="display:none" id="examinee_id" placeholder="Examinee ID" readonly><br/>
                 <label>Or Number</label><input type="text" class="form-control" name="ornum" id="ornum" placeholder="OR Number"><br/>
                 <label>Fullname</label><input type="text" class="form-control" name="fullname" id="fullname" placeholder="Fullname"><br/>
                 <label>Last School Attended</label><input type="text" class="form-control" name="lastschool" id="lastschool" placeholder="Last School Attended"><br/>
